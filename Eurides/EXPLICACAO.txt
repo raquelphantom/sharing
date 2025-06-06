@@ -1,0 +1,2 @@
+Drive _Thru é o que abre no pendrive
+Drive _Thru_D é o que abre DOWNLOADS, precisa estar nessa pasta
