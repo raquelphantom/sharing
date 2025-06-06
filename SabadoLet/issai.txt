@@ -1,0 +1,29 @@
+1- Pwd
+
+2- ls -A
+
+3- mkdir projetos
+
+4- cd projetos
+
+5- touch anotacoes.txt
+
+6- cp anotacoes.txt ..
+
+7- mv anotacoes.txt anotacoes_antigas.txt
+
+8- rm anotacoes_antigas.txt
+
+9- mkdir temp; rm -rf temp
+
+10- cat anotacoes.txt
+
+11- chmod 700 anotacoes.txt
+
+12- ls -d
+
+13- alias lista="ls -lh
+
+14- man cp
+
+15- rm -rf temp*; rm -rf *.log
