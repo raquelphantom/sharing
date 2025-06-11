@@ -6,8 +6,6 @@ Teste com Drive Thru
 COD	DESCRICAO               CUSTO
 -------------------------------------------------
 
-  1	Big Mac              	R$       22,62
-  2	Big Mac - Meal       	R$       32,26
   3	2 Cheeseburgers      	R$       14,63
   4	2 Cheeseburgers - Meal	R$       27,73
   5	Quarter Pounder with Cheese	R$       21,49
@@ -25,6 +23,8 @@ COD	DESCRICAO               CUSTO
  17	Double Filet-O-Fish  	R$       26,59
  18	Double Filet-O-Fish - Meal	R$       36,23
  19	Double Cheeseburger  	R$        9,02
- 20	Double Cheeseburger - Meal	R$       23,76
- 21	vamo ver             	R$       60,00
- 22	aasds                	R$        70,00
+ 21	ttsdas               	R$        3,00
+ 22	das                  	R$        2,00
+ 23	vamo ver ai          	R$       90,00
+ 24	fsfsfx               	R$        9,00
+ 25	                     	R$        9,00

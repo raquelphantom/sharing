@@ -12,11 +12,11 @@
  
  /* PROTÓTIPOS DE FUNÇÕES */
 void capturaDados (void);
+int contagemCod (void);
 void gravarDados( void );
 char menu (void);
 void cadastroDefault (void);
 void gerarRelatorio(void);
-int contagemCod (void);
 
 
 /* TIPOS PRÉ-DEFINIDOS */
@@ -54,13 +54,37 @@ REGISTRO vet[NUM_PRODUTOS] = {
 
 REGISTRO 		r;
 
+
+
+
 void capturaDados (void)
 {
-	r.codprod = contagemCod() +1;
+	r.codprod = contagemCod() +1; 
 	printf ("\nDigite a descrição do produto: ");
 	fflush(stdin); gets(r.descrprod);
 	printf ("\nDigite o custo unitário do produto: ");
 	fflush(stdin); scanf ("%f", &r.custoprod);
+}
+
+int contagemCod (void){
+    FILE *Arq;
+    REGISTRO temp;
+    int Cod = 0; //Zera o Cod.Prod
+
+    Arq = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\PRODUTOS.DAT", "r");
+    if (Arq == NULL) {
+        return 0;  // Arquivo ainda não existe
+    }
+/* Calcula Cod. do Produto*/
+    while (fread(&temp, sizeof(REGISTRO), 1, Arq) == 1) {
+        if (temp.codprod > Cod) {
+            Cod = temp.codprod; 
+        }
+    }
+
+    fclose(Arq);
+    return Cod;
+
 }
 
 void gravarDados( void )
@@ -182,29 +206,10 @@ void gerarRelatorio(void)
     getch();
 }
 
-int contagemCod (void){
-    FILE *Arq;
-    REGISTRO temp;
-    int Cod = 0;
-
-    Arq = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\PRODUTOS.DAT", "r");
-    if (Arq == NULL) {
-        return 0;  // Arquivo ainda não existe
-    }
-
-    while (fread(&temp, sizeof(REGISTRO), 1, Arq) == 1) {
-        if (temp.codprod > Cod) {
-            Cod = temp.codprod;
-        }
-    }
-
-    fclose(Arq);
-    return Cod;
-
-}
 
 
-int 	main()
+
+int main()
 {	char op;
 	//setlocale(LC_ALL, "");
 	setlocale(LC_ALL, "");

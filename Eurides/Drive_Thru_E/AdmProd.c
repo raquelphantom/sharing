@@ -4,6 +4,7 @@
 	CADASTRA.c
 	CONSULTA.c
 	RETATORIO.c
+	EXCLUIR.c
 */
 
 #include <stdio.h>

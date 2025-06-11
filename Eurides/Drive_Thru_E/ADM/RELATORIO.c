@@ -1,10 +1,9 @@
 /* BIBLIOTECAS */
 #include <stdio.h>
-#include <conio.h>
 #include <stdlib.h>
+#include <conio.h>
 #include <locale.h>
 
-/* VARIÁVEIS LOCAIS AO MAIN */
 void Relat (void)
 {
 FILE  * Arq;
