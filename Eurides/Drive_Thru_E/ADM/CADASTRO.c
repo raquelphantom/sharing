@@ -5,10 +5,11 @@
 #include <string.h>
 #include <locale.h>
 
+
 /* CONSTANTES */
 #define   TITULO   "Teste com Drive Thru"
 #define   TAMSTR   201
-#define   NUM_PRODUTOS 20
+#define   NUM_PRODUTOS 10
  
  /* PROTÓTIPOS DE FUNÇÕES */
 void capturaDados (void);
@@ -40,16 +41,6 @@ REGISTRO vet[NUM_PRODUTOS] = {
     {8, "Double Quarter Pounder with Cheese - Meal", 36.80},
     {9, "Bacon Habanero Ranch Quarter Pounder", 23.19},
     {10, "Bacon Habanero Ranch Quarter Pounder - Meal", 32.83},
-    {11, "Deluxe Quarter Punder", 23.19},
-    {12, "Deluxe Quarter Punder - Meal", 32.83},
-    {13, "Bacon & Cheese Quarter Pounder", 23.19},
-    {14, "Bacon & Cheese Quarter Pounder - Meal", 32.83},
-    {15, "Filet-O-Fish", 21.49},
-    {16, "Filet-O-Fish - Meal", 31.13},
-    {17, "Double Filet-O-Fish", 26.59},
-    {18, "Double Filet-O-Fish - Meal", 36.23},
-    {19, "Double Cheeseburger", 9.02},
-    {20, "Double Cheeseburger - Meal", 23.76},
 };
 
 REGISTRO 		r;
@@ -77,9 +68,9 @@ int contagemCod (void){
     }
 /* Calcula Cod. do Produto*/
     while (fread(&temp, sizeof(REGISTRO), 1, Arq) == 1) {
-        if (temp.codprod > Cod) {
-            Cod = temp.codprod; 
-        }
+        if (Cod < temp.codprod ) {
+            Cod = temp.codprod;
+        	}
     }
 
     fclose(Arq);

@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <locale.h>
 
+
 void Relat (void)
 {
 FILE  * Arq;
