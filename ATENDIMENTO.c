@@ -23,20 +23,20 @@ char menu (void){
 	}while(opc<'0' || opc>'3');
 		return (opc);
 };
-void gerencia (char opc){
+void admin (char opc){
 	switch(opc){
 		case '0' : exit(0); break;
-		case '1' : "PEDIDO.exe"; break;
-		case '2' : "COMANDA.exe"; break;
-		case '3' : "FILA.exe"; break;
+		case '1' : system("PEDIR"); break;
+		case '2' : system("COMANDA"); break;
+		case '3' : system("FILA"); break;
 	};
 };
 
 int main(){
-	char op;
+	char opc;
 	do{
-		op = menu();//oferece o menu de escolhas
-		admin(op);//chama a função que gerencia a opção desejada
-	}while (op!='0');
+		opc = menu();//oferece o menu de escolhas
+		admin(opc);//chama a funÃ§Ã£o que gerencia a opÃ§Ã£o desejada
+	}while (opc!='0');
 	return 0;
 }
