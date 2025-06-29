@@ -1,0 +1,254 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <string.h>
+#include <locale.h>
+
+#define   TITULO   "Drive Thru do Mickey e Donald"
+#define   TITULO2   "Registrar Pedido"
+#define   TAMSTR   21
+
+
+typedef   struct // registro do pedido
+{
+	int codprod;
+	char descrprod[TAMSTR];
+	float custoprod;
+	int quantidade;
+	float subtotal;
+} PEDIDO;
+
+PEDIDO    ped;
+
+typedef   struct // registro de itens
+{
+	int		codprod;
+	char	descrprod[TAMSTR];
+	float	custoprod;
+} REGISTRO;
+
+REGISTRO 		r;
+
+void capturaDados (void)
+{
+	printf ("\nDigite o c�digo: ");
+	fflush(stdin); scanf ("%i", &r.codprod);
+	printf ("\nDigite a descrição do produto: ");
+	fflush(stdin); gets(r.descrprod);
+	printf ("\nDigite o custo unitário do produto: ");
+	fflush(stdin); scanf ("%f", &r.custoprod);
+}
+
+void gravarDados( void )
+{
+	FILE * Arq;	
+	Arq = fopen ("PRODUTOS.DAT", "a");
+	if (Arq == NULL ) 
+	{
+		printf ("\nErro ao abrir o arquivo PRODUTOS.DAT");
+		getch();
+		exit(0);
+	}
+	else
+	{
+		printf ("\nPRODUTOS.DAT alocado em: %p", Arq);
+		getch();
+	}
+	fwrite ( &r, sizeof(r), 1, Arq );
+	fclose(Arq);
+	printf ("\nDados gravados com sucesso");
+	getch();
+}
+
+void lerDados (void)
+{
+	FILE * Arq;	
+	Arq = fopen ("PRODUTOS.DAT", "r");
+	if (Arq == NULL ) 
+	{
+		printf ("\nErro ao ler PRODUTOS.DAT");
+		getch();
+		exit(0);
+	}
+	else
+	{
+		printf ("\nPRODUTOS.DAT aberto para leitura: %p", Arq);
+		getch();
+	}
+	while ( !feof(Arq) )
+	{
+		fread ( &r, sizeof(r), 1, Arq );
+		if ( !feof(Arq) )
+		{
+		    printf ("\n%3i\t%-21s\tR$%12.2f", r.codprod, r.descrprod, r.custoprod);
+	    }
+	}
+	fclose(Arq);
+	getch();
+}
+
+char menu (void)
+{   char opc;
+    do
+    {	system("cls");
+		printf ("\n%s\n", TITULO);
+		printf ("\n 1. CADASTRA");
+		printf ("\n 2. CONSULTA");
+		printf ("\n 3. REGISTRAR PEDIDO");
+		printf ("\n 0. ENCERRA ");
+		printf ("\n------------");
+		printf ("\nSUA ESCOLHA: "); 
+		fflush (stdin); opc=getchar();
+	}
+	while ( opc<'0' || opc>'3' );
+	return (opc);
+}
+void mostrarProdutos (void)
+{
+	FILE * Arq;	
+	Arq = fopen ("PRODUTOS.DAT", "r");
+	if (Arq == NULL ) 
+	{
+		printf ("\nErro ao ler PRODUTOS.DAT");
+		getch();
+		exit(0);
+	}
+	system("cls");
+	printf ("\n%s\n", TITULO2);
+	while ( !feof(Arq) )
+	{
+		fread ( &r, sizeof(r), 1, Arq );
+		if ( !feof(Arq) )
+		    printf ("\n %i. %s - %.2f", r.codprod, r.descrprod, r.custoprod);
+	}
+	fclose(Arq);
+}
+
+int buscaProdutoSequencial (int cod)
+{
+	FILE * Arq;	
+	Arq = fopen ("PRODUTOS.DAT", "r");
+	if (Arq == NULL ) 
+	{
+		printf ("\nErro ao ler PRODUTOS.DAT");
+		getch();
+        return (0);
+	}
+	
+	while ( !feof(Arq) )
+	{
+		fread ( &r, sizeof(r), 1, Arq );
+		if ( !feof(Arq) )
+			if (r.codprod == cod)
+			{
+				fclose(Arq);	
+				return (1);
+			}
+	}
+	fclose(Arq);
+	return (0);	
+}
+
+void montaCabecalhoPedido (void)
+{
+	FILE *NF, *Arq;	
+	Arq = fopen ("PRODUTOS.DAT", "r");
+	NF = fopen ("COMANDA.TXT", "w");
+		if (Arq == NULL ) 
+	{
+		printf ("\nErro ao ler PRODUTOS.DAT");
+		getch();
+        return (0);
+	}
+	fprintf(NF, "\nCOD/tPRODUTO/tVALOR/tQTD/tTOTAL");
+	fprintf(NF, "\n=================================");
+	
+    fclose(NF);
+    fclose(Arq);
+}
+void registrarpedido (void)
+{
+	int numerodeprodutos = 0, flag, i;
+	int codigo, quantidade;
+	float total = 0.0f;
+	char opc;
+	
+    mostrarProdutos();		
+    montaCabecalhoPedido();//, arquivo 'w'
+    
+    do
+    {
+		do 
+		{
+			flag = 0;
+			printf ("\nDigite o Código do Produto: (Digite 0 para ir ao pagamento!)"); 
+			fflush (stdin); scanf("%i", &codigo);
+			if ( buscaProdutoSequencial(codigo) == 0)
+			{
+				printf ("\nCodigo nao Cadastrado\n");
+				getche();
+			} 
+			else
+				flag = 1;
+		}
+		while( flag == 0 );
+	
+		do
+		{
+			printf("Quantidade de '%s': ", r.descrprod);
+			fflush(stdin);
+			scanf("%d", &quantidade);
+			if ( quantidade <= 0 )
+			{
+				printf("Quantidade invalida!!!!");
+				getch();
+			}
+		}
+		while ( quantidade <= 0 );	
+
+		total = total + quantidade*r.custoprod;
+		printf ("\nTotal parcial = R$ %.2f", total);
+	
+		ped.codprod = r.codprod;
+		ped.custoprod = r.custoprod;
+		strcpy(ped.descrprod, r.descrprod);
+		ped.quantidade = quantidade;
+		ped.subtotal = quantidade*r.custoprod;
+	
+		//montaLinhaPedido(ped); usar modo 'a'
+	
+		printf ("\nDeseja mais alguma coisa? [0=n�o] ");
+		fflush(stdin); opc = getche();
+	}
+	while (opc != '0' );
+}
+
+void gerencia(char opc)
+{	switch (opc)
+	{
+		case '0': exit(0); break;
+		case '1':
+			{
+				capturaDados();
+    			gravarDados();	
+			}
+		break;
+		case '2': lerDados(); break;
+		case '3': registrarpedido(); break;
+	}
+}
+
+
+
+
+int 	main()
+{	char op;
+	setlocale(LC_ALL, "");
+	do
+	{
+		op = menu();
+		gerencia (op);
+	}
+	while (op!='0');
+	return 0;
+}
