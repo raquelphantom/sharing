@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h> 
-#include <string.h>
 #include <locale.h>
+#include <windows.h>
 
 #define TAMSTR 201
 
@@ -14,15 +14,16 @@ typedef struct {
 
 typedef struct {
 	REGISTRO r;
+	int codped;
 	int qtd;
 	float total;
-}
-PRODUTO; 	PRODUTO p;
+	float parcial;
+	char cartao;
+}PRODUTO; 	PRODUTO p;
 
 void abre (void);
-void exclui (void);
 char menu (void);
-void pag (char opc);
+void pag (char oc);
 void money (void);
 void cartao (void);
 void pix (void);
@@ -40,22 +41,19 @@ void abre (void)
 		exit(0);
 	}
 	
+	printf ("\nCOD.\tPRODUTO\t\tVALOR UNI.\tQTD.\tVALOR ITEM"); 
 	while (fread(&p, sizeof(p), 1, Arq) == 1) 
 	{
-    printf ("\nTotal do Pedido:R$%.2f\n", p.total);
+	printf("\n%i\t %s\t %.2f\t %i\t %.2f", p.r.codprod, p.r.descrprod, p.r.custoprod, p.qtd, p.parcial,p.total);
 	}
+	printf("\n\nTotal do Pedido:R$%.2f\n",p.total);
 	/* Fecha o arquivo */
 	fclose(Arq);
 	}
 
-void exclui (void)
-{
-	
-	
-}
 
 char menu (void)
-{   char opc;
+{   char oc;
     do
     {	system("cls");
     	abre();
@@ -66,15 +64,15 @@ char menu (void)
 		printf ("\n 0. CANCELAR ");
 		printf ("\n------------");
 		printf ("\nSUA ESCOLHA: "); 
-		fflush (stdin); opc=getche();
+		fflush (stdin); oc=getche();
 	}
-	while ( opc<'0' || opc>'3' );
-	return (opc);
+	while ( oc<'0' || oc>'3' );
+	return (oc);
 }
 
 
-void pag(char opc)
-{	switch (opc)
+void pag(char oc)
+{	switch (oc)
 	{
 		case '0': exit(0); break;
 		case '1': money();	break;
@@ -107,35 +105,46 @@ void money (void)
 			}
 		}
 	}while(valor > p.total);
+	system("cls");
+	system ("color 0a");
+	printf("Pedido pago com Dinheiro.");
+	getch();
 }
 
 void cartao (void)
 {
-	
-	
-	
+	system("E:\\Drive_Thru_E\\PEDIDOS\\CARTAO");
+	system("cls");
+	system ("color 0d");
+	printf("Pedido pago com Cartão.");
+	getch();
 }
 
 void pix (void)
 {
-	
-	
-	
+	system ("cls");
+	printf("\nEscaneie o QR code:");
+	system("start E:\\Drive_Thru_E\\ARQUIVOS\\QR_CODE.PNG");
+	sleep (5);
+	system("taskkill /im Photos.exe /f");
+	system ("cls");
+	system ("color 01");
+	printf("Pedido pago com PIX.");
+	getch();
 }
-
-
-
 
 
 
 int main()
 {
+	char oc;
+
 	setlocale(LC_ALL, "");
-	char opc;
-	
-	opc= menu();// mostra cardápio lendo o prod.dat
-	pag(opc);
-	//comanda();//monta o pedido 
+	oc= menu();
+	pag(oc);
+	system("E:\\Drive_Thru_E\\PEDIDOS\\COMANDA");
+	system ("color 07");
 	printf("\nAgradecemos pela preferência!!!\nVolte sempre :)");
+	getch();
 	return 0;
 }

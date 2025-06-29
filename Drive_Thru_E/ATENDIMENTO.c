@@ -30,7 +30,7 @@ void admin (char opc){
 	switch(opc){
 		case '0' : exit(0); break;
 		case '1' : system("E:\\Drive_Thru_E\\PEDIDOS\\PEDIR"); break;
-		case '2' : system("E:\\Drive_Thru_E\\PEDIDOS\\COMANDA"); break;
+		case '2' : system("notepad E:\\Drive_Thru_E\\ARQUIVOS\\COMANDA.DAT"); break;
 		case '3' : system("E:\\Drive_Thru_E\\PEDIDOS\\FILA"); break;
 		default : printf("Opção inválida!"); break;
 	};

@@ -9,24 +9,12 @@ COD	DESCRICAO               CUSTO
   1	Big Mac              	R$       22,62
   2	Big Mac - Meal       	R$       32,26
   3	2 Cheeseburgers      	R$       14,63
+  4	2 Cheeseburgers - Meal	R$       27,73
   5	Quarter Pounder with Cheese	R$       21,49
   6	Quarter Pounder with Cheese - Meal	R$       31,13
   7	Double Quarter Pounder with Cheese	R$       27,16
   8	Double Quarter Pounder with Cheese - Meal	R$       36,80
   9	Bacon Habanero Ranch Quarter Pounder	R$       23,19
  10	Bacon Habanero Ranch Quarter Pounder - Meal	R$       32,83
- 11	dbadsbc              	R$        0,00
- 12	dbauajsdbca          	R$        8,00
- 13	sfgrgerrferdrev      	R$        2,00
- 14	auuuhdsbdh           	R$       25,00
- 15	yuasghhjcshjajda     	R$       23,00
- 16	gsgascbyabasycv      	R$     2222,00
- 17	iishuahjashja        	R$   525262,00
- 18	testando ai          	R$     9999,00
- 19	vai ‡a               	R$       22,00
- 20	yasygcavs            	R$      772,00
- 21	hsygabscyuabyh       	R$  2222222,00
- 22	ttttttt              	R$ 22243534,00
- 23	uuuuuuuu             	R$100000000,00
- 24	2500                 	R$       21,00
- 25	testando o ‡ e o Æo  	R$       20,00
+ 11	batata               	R$        6,00
+ 12	burgui               	R$       10,00

@@ -13,15 +13,18 @@ typedef struct {
 
 typedef struct {
 	REGISTRO r;
+	int codped;
 	int qtd;
 	float total;
+	float parcial;
+	char cartao;
 }
 PRODUTO;
  /* PROTÓTIPOS DE FUNÃÇÕES */
  int busca (int c);
  void menu (void);
  void pick (void);
- void GravaPedido (REGISTRO r);
+ void GravaPedido (PRODUTO p);
  
 /*VARIAVEIS GLOBAIS*/
 	REGISTRO r;
@@ -65,18 +68,17 @@ void menu (void){
 }
 
 void pick (void){
-
-p.r=r;
-
 	system("cls");
      menu();// mostra cardápio lendo o prod.dat
 	printf("\nFaça seu pedido:  ");
 	fflush(stdin); scanf("%i", &r.codprod);
 	if(busca(r.codprod) == 1){
+		p.r=r;
 		printf("\n Quantas unidades de %s voce deseja?", r.descrprod);
 			fflush(stdin); scanf("%i", &p.qtd);
+			p.parcial =p.qtd*r.custoprod;
 			printf("\nTotal parcial: R$ %.2f", p.qtd*r.custoprod);
-			p.total = p.total+p.qtd*r.custoprod;
+			p.total=p.total+p.parcial;
 			printf("\nTotal do pedido: %.2f",p.total);
 	}
 	else{
@@ -84,10 +86,10 @@ p.r=r;
 	}
 }
 
-void GravaPedido (REGISTRO r)
+void GravaPedido (PRODUTO p)
 {
 	FILE * Arq;
-	Arq = fopen ("PEDIDO.DAT", "a");
+	Arq = fopen ("E:\\Drive_Thru_E\\ARQUIVOS\\PEDIDO.DAT", "a");
 		if (Arq == NULL ) 
 	{
 		printf ("\nErro ao ler arquivo");
@@ -105,10 +107,10 @@ int main(){
 	do{
 		system ("color 04	");
 		pick();//função pra escolher
+		GravaPedido (p);
 		printf("\ndeseja adicionar outro produto?  [s/n]");
-		GravaPedido (r);
 		fflush(stdin); opc = getche();
 	}while (opc != 'n' && opc != 'N');
-	system ("PAGAMENTOS.exe");
+	system ("E:\\Drive_Thru_E\\PEDIDOS\\PAGAMENTO.exe");
     return 0;
 }
