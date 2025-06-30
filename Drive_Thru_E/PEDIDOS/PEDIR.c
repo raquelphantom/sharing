@@ -17,7 +17,7 @@ typedef struct {
 	int qtd;
 	float total;
 	float parcial;
-	char cartao;
+	char cartao[16+1];
 }
 PRODUTO;
  /* PROTÓTIPOS DE FUNÃÇÕES */

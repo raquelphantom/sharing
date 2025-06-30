@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h> 
+#include <string.h>
 #include <locale.h>
 
 #define TAMSTR 201
@@ -17,7 +18,7 @@ typedef struct {
 	int qtd;
 	float total;
 	float parcial;
-	char cartao;
+	char cartao[16+1];
 }PRODUTO; 	PRODUTO p;
 
 int contagemCod (void){
@@ -44,9 +45,8 @@ int contagemCod (void){
 
 
 void comanda (void){
-	
-	FILE * Arq, *Com;
 	p.codped= contagemCod()+1;
+	FILE * Arq, *Com;
 	Arq = fopen ("E:\\Drive_Thru_E\\ARQUIVOS\\PEDIDO.DAT", "r");
 	Com = fopen ("E:\\Drive_Thru_E\\ARQUIVOS\\COMANDA.DAT", "a");
 	
@@ -65,16 +65,40 @@ void comanda (void){
 	
 	fprintf(Com,"\n\nTotal do Pedido:R$%.2f\n",p.total);
 	fprintf(Com,"\n====================================================================");
+	system("notepad E:\\Drive_Thru_E\\ARQUIVOS\\COMANDA.DAT");
 
 
 	fclose(Arq);
 	fclose(Com);
 }
 
+void gravar (void)
+{
+	p.codped= contagemCod();
+	FILE *Pag;
+	FILE *Num;
+	
+	Num = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\NUMERO.DAT", "r");
+	Pag = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\CARTOES.DAT", "a");
+	
+	fprintf(Pag, "\nCod. Ped  |    \t   Num. Cart.\n");
+	
+	while (fgets(p.cartao, sizeof(p.cartao), Num) != NULL) { 
+		fprintf(Pag, "   %d     |   \t%s", p.codped, p.cartao);
+	}
+	
+	fprintf(Pag,"\n====================================================================\n");
+
+	
+    fclose(Pag);
+	fclose(Num);
+	remove("E:\\Drive_Thru_E\\ARQUIVOS\\NUMERO.DAT");
+}
 
 int main()
 {
 	comanda();
+	gravar();
 	remove("E:\\Drive_Thru_E\\ARQUIVOS\\PEDIDO.DAT");
 	return 0;
 }
