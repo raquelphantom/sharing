@@ -5,7 +5,7 @@
 #include <locale.h>
 
 
-#define   TITULO   "Teste com Drive Thru"
+#define   TITULO   "Cardápio Lanches Web"
 #define   TAMSTR   201
 
 typedef   struct
@@ -67,7 +67,7 @@ void excluirProduto(void) {
 int main (void)
 {
 	setlocale(LC_ALL, "");
-	system ("color d1");
+	system ("color 05");
 	excluirProduto();
 	getch();
 	return 0;

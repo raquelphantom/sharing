@@ -40,13 +40,16 @@ void abre (void)
 		getch();
 		exit(0);
 	}
-	
-	printf ("\nCOD.\tPRODUTO\t\tVALOR UNI.\tQTD.\tVALOR ITEM"); 
+	printf("\n============================================================");
+	printf("\nCOD.\tPRODUTO        VALOR UNI.\tQTD.\tVALOR ITEM"); 
+	printf("\n------------------------------------------------------------ ");
 	while (fread(&p, sizeof(p), 1, Arq) == 1) 
 	{
-	printf("\n%i\t %s\t %.2f\t %i\t %.2f", p.r.codprod, p.r.descrprod, p.r.custoprod, p.qtd, p.parcial,p.total);
+	printf("\n%i\t %s\t %.2f\t\t %i\t %.2f", p.r.codprod, p.r.descrprod, p.r.custoprod, p.qtd, p.parcial,p.total);
 	}
+	printf("\n============================================================");
 	printf("\n\nTotal do Pedido:R$%.2f\n",p.total);
+	printf("\n============================================================");
 	/* Fecha o arquivo */
 	fclose(Arq);
 	}
@@ -57,13 +60,15 @@ char menu (void)
     do
     {	system("cls");
     	abre();
-		printf ("\nEscolha a forma de Pagamento: \n");
-		printf ("\n 1. DINHEIRO");
-		printf ("\n 2. CARTÃO");
-		printf ("\n 3. PIX");
-		printf ("\n 0. CANCELAR ");
-		printf ("\n------------");
-		printf ("\nSUA ESCOLHA: "); 
+    	printf("\n\n==========================\n");
+		printf("   FORMA DE PAGAMENTO: ");
+		printf("\n--------------------------  \n");
+		printf("      1. DINHEIRO\n");
+		printf("      2. CARTÃO\n");
+		printf("      3. PIX\n");
+		printf("      0. CANCELAR ");
+		printf("\n==========================   ");
+		printf("\nSUA ESCOLHA: "); 
 		fflush (stdin); oc=getche();
 	}
 	while ( oc<'0' || oc>'3' );
@@ -86,6 +91,8 @@ void pag(char oc)
 void money (void)
 {
 	float valor;
+	int flag;
+	system("cls");
 	abre();
 	do
 	{
@@ -102,11 +109,13 @@ void money (void)
 			{
 			valor=valor-p.total;
 			printf("\nTroco de R$%.2f", valor);
+			getch();
+			flag =1;
 			}
 		}
-	}while(valor > p.total);
+	}while(flag == 0);
 	system("cls");
-	system ("color 0a");
+	system ("color 0A");
 	printf("Pedido pago com Dinheiro.");
 	getch();
 }
@@ -140,6 +149,7 @@ int main()
 	char oc;
 
 	setlocale(LC_ALL, "");
+	system ("color 0a	");
 	oc= menu();
 	pag(oc);
 	system("E:\\Drive_Thru_E\\PEDIDOS\\COMANDA");

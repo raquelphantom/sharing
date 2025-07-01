@@ -7,7 +7,7 @@
 
 
 /* CONSTANTES */
-#define   TITULO   "Teste com Drive Thru"
+#define   TITULO   "Cardápio Lanches Web"
 #define   TAMSTR   201
 #define   NUM_PRODUTOS 10
  
@@ -31,16 +31,16 @@ REGISTRO;
 
 /* VARIÁVEIS GLOBAIS */
 REGISTRO vet[NUM_PRODUTOS] = {
-    {1, "Big Mac", 22.62},
-    {2, "Big Mac - Meal", 32.26},
-    {3, "2 Cheeseburgers", 14.63},
-    {4, "2 Cheeseburgers - Meal", 27.73},
-    {5, "Quarter Pounder with Cheese", 21.49},
-    {6, "Quarter Pounder with Cheese - Meal", 31.13},
-    {7, "Double Quarter Pounder with Cheese", 27.16},
-    {8, "Double Quarter Pounder with Cheese - Meal", 36.80},
-    {9, "Bacon Habanero Ranch Quarter Pounder", 23.19},
-    {10, "Bacon Habanero Ranch Quarter Pounder - Meal", 32.83},
+    {1, "Hello, Burger!", 20.00},
+    {2, "Ctrl+Grill", 25.00},
+    {3, "MainBurger()", 27.00},
+    {4, "VimBurguer", 30.00},
+    {5, "Nano Fries", 12.00},
+    {6, "Try Catchup()", 15.00},
+    {7, "JSON do Céu", 25.00},
+    {8, "GitShake ", 15.00},
+    {9, "Cupcake++", 18.00},
+    {10,"Array de Amendoim", 22.00},
 };
 
 REGISTRO 		r;
@@ -206,7 +206,7 @@ int main()
 	setlocale(LC_ALL, "");
 	do
 	{
-		system ("color de");
+		system ("color 05");
 		op = menu();
 		gerencia (op);
 	}

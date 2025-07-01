@@ -39,9 +39,10 @@ void abre (void)
 	}
 	
 	while (fread(&p, sizeof(p), 1, Arq) == 1) 
-	{
-	printf("\n\nTotal do Pedido:R$%.2f\n",p.total);
-	}
+	{}
+	printf("==========================\n");
+	printf("Total do Pedido:R$%.2f\n",p.total);
+	printf("==========================\n");
 	/* Fecha o arquivo */
 	fclose(Arq);
 	}
@@ -54,18 +55,20 @@ void cartao (void)
     do
     {	system("cls");
     	abre();
-		printf ("\nEscolha a forma de Pagamento: \n");
-		printf ("\n 1. DÉBITO");
-		printf ("\n 2. CRÉDITO");
-		printf ("\n 3. VALE REFEIÇÃO");
-		printf ("\n 4. VALE ALIMENTAÇÃO ");
-		printf ("\n------------");
-		printf ("\nSUA ESCOLHA: "); 
+    	printf("\n==========================\n");
+		printf("     TIPO DE CARTÃO: ");
+		printf("\n--------------------------  \n");
+		printf ("    1. DÉBITO\n");
+		printf ("    2. CRÉDITO\n");
+		printf ("    3. VALE REFEIÇÃO\n");
+		printf ("    4. VALE ALIMENTAÇÃO\n");
+		printf("\n==========================   ");
+		printf("\nSUA ESCOLHA: "); 
 		fflush (stdin); op=getche();
 	}
 	while ( op<'1' || op>'4' );
 	
-	printf ("\nTotal do Pedido:R$%.2f\n", p.total);;
+	printf ("\nTotal do Pedido:R$%.2f\n", p.total);
 	
 	switch (op)
 	{
@@ -80,7 +83,7 @@ void cartao (void)
 		case '3': system("cls"); printf("\n%s selecionado, Insira ou Aproxiime o Cartão", "VR"); 
 			sleep(5); break;
 			
-		case '4': system("cls"); printf("\n%s selecionado, Insira ou Aproxiime o Cartão", "VT");
+		case '4': system("cls"); printf("\n%s selecionado, Insira ou Aproxiime o Cartão", "VA");
 			sleep(5); break;
 	}
 
@@ -120,6 +123,7 @@ int main()
 	char opc;
 
 	setlocale(LC_ALL, "");
+	system ("color 0a	");
 	system("cls");
 	cartao();
 	return 0;

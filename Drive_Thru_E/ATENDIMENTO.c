@@ -12,13 +12,14 @@
 char menu (void){
 	char opc[6];
 	system("cls");
-	printf("\n ======================= \n");
-	printf("             MENU         ");
-	printf("\n ======================= \n");
-	printf("1- Pedir\n");
-	printf("2- Comanda\n");
-	printf("3- Fila\n");
-	printf("0- Encerrar\n");
+	printf("\n ========================== \n");
+	printf("            MENU         ");
+	printf("\n ========================== \n");
+	printf("\t1- Pedir\n");
+	printf("\t2- Comanda\n");
+	printf("\t3- Fila\n");
+	printf("\t0- Encerrar");
+	printf("\n ========================== \n");
 	printf("Escolha:");
 	fflush(stdin); gets(opc);
 	if (strcmp(opc, "7642") == 0)
@@ -38,6 +39,7 @@ void admin (char opc){
 
 int main(){
 	setlocale(LC_ALL, "");
+	system ("color 0B	");
 	char opc;
 	do{
 		opc = menu();//oferece o menu de escolhas

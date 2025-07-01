@@ -5,6 +5,8 @@
 
 #define TAMSTR 201
 
+#define   TITULO   "Cardápio Lanches Web"
+
 typedef struct {
 	int		codprod;
 	char	descrprod[TAMSTR];
@@ -23,6 +25,7 @@ PRODUTO;
  /* PROTÓTIPOS DE FUNÃÇÕES */
  int busca (int c);
  void menu (void);
+ void card (void);
  void pick (void);
  void GravaPedido (PRODUTO p);
  
@@ -52,6 +55,16 @@ while (fread(&r, sizeof(r), 1, arq) == 1) {
 }
 
 void menu (void){
+		printf("\tSeja bem-vindo(a) ao Lanches Web!\n");
+		printf("\t  Venha zerar sua Variável Fome!\n");
+		printf("\n ==================================================== \n");
+		printf("                %s         ",TITULO);
+		printf("\n ==================================================== ");
+		printf("\n COD.  \t    PRODUTO  	\t 	  VALOR");
+		printf("\n ---------------------------------------------------- ");
+}
+
+void card (void){
 	FILE *arq;
 	arq = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\PRODUTOS.DAT","r");//r - lÃª
 	if(arq == NULL)
@@ -60,21 +73,23 @@ void menu (void){
 		getch();
 		exit(0);
 	}//(EOF) fim do arquivo - true ou false
+	menu();
 	while (fread(&r, sizeof(r), 1, arq) == 1) 
 	{
-    	printf("\n %i \t %s \t R$%.2f", r.codprod,r.descrprod , r.custoprod);
+    	printf("\n %i  \t %s     	\t R$%.2f", r.codprod,r.descrprod, r.custoprod);
 	}
+	printf("\n ==================================================== ");
 	fclose(arq);
 }
 
 void pick (void){
 	system("cls");
-     menu();// mostra cardápio lendo o prod.dat
-	printf("\nFaça seu pedido:  ");
+    card();// mostra cardápio lendo o prod.dat
+	printf("\nInsira o Código do que deseja: ");
 	fflush(stdin); scanf("%i", &r.codprod);
 	if(busca(r.codprod) == 1){
 		p.r=r;
-		printf("\n Quantas unidades de %s voce deseja?", r.descrprod);
+		printf("\n Quantas unidades de %s voce deseja?: ", r.descrprod);
 			fflush(stdin); scanf("%i", &p.qtd);
 			p.parcial =p.qtd*r.custoprod;
 			printf("\nTotal parcial: R$ %.2f", p.qtd*r.custoprod);
@@ -83,6 +98,7 @@ void pick (void){
 	}
 	else{
 		printf("produto não encontrado");
+		exit (0);
 	}
 }
 
@@ -105,10 +121,10 @@ int main(){
 	setlocale(LC_ALL, "");
 	char opc;
 	do{
-		system ("color 04	");
+		system ("color 0a	");
 		pick();//função pra escolher
 		GravaPedido (p);
-		printf("\ndeseja adicionar outro produto?  [s/n]");
+		printf("\ndeseja adicionar outro produto?  [s/n]\n");
 		fflush(stdin); opc = getche();
 	}while (opc != 'n' && opc != 'N');
 	system ("E:\\Drive_Thru_E\\PEDIDOS\\PAGAMENTO.exe");

@@ -56,16 +56,17 @@ void comanda (void){
 		getch();
 		exit(0);
 	}
-	fprintf(Com,"\nPedido %i:", p.codped);
+	fprintf(Com,"\n\nPedido %i:", p.codped);
+	fprintf(Com,"\n============================================================");
 	fprintf(Com,"\nCOD.\tPRODUTO\t\tVALOR UNI.\tQTD.\tVALOR ITEM"); 
+	fprintf(Com,"\n------------------------------------------------------------ ");
 	while (fread(&p, sizeof(p), 1, Arq) == 1) 
 	{
-	fprintf(Com,"\n%i\t %s\t %.2f\t %i\t %.2f",p.r.codprod, p.r.descrprod, p.r.custoprod, p.qtd, p.parcial);
+	fprintf(Com,"\n%i\t %s\t %.2f\t\t %i\t %.2f",p.r.codprod, p.r.descrprod, p.r.custoprod, p.qtd, p.parcial);
 	}
-	
+	fprintf(Com,"\n------------------------------------------------------------ ");
 	fprintf(Com,"\n\nTotal do Pedido:R$%.2f\n",p.total);
-	fprintf(Com,"\n====================================================================");
-	system("notepad E:\\Drive_Thru_E\\ARQUIVOS\\COMANDA.DAT");
+	fprintf(Com,"\n====================================================================\n");
 
 
 	fclose(Arq);
@@ -81,13 +82,15 @@ void gravar (void)
 	Num = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\NUMERO.DAT", "r");
 	Pag = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\CARTOES.DAT", "a");
 	
-	fprintf(Pag, "\nCod. Ped  |    \t   Num. Cart.\n");
+
 	
 	while (fgets(p.cartao, sizeof(p.cartao), Num) != NULL) { 
+		fprintf(Pag, "\nCod. Ped  |    \t   Num. Cart.\n");
 		fprintf(Pag, "   %d     |   \t%s", p.codped, p.cartao);
+		fprintf(Pag,"\n====================================================================\n");
 	}
 	
-	fprintf(Pag,"\n====================================================================\n");
+	
 
 	
     fclose(Pag);
@@ -97,8 +100,9 @@ void gravar (void)
 
 int main()
 {
-	comanda();
 	gravar();
+	comanda();
+	system("notepad E:\\Drive_Thru_E\\ARQUIVOS\\COMANDA.DAT");
 	remove("E:\\Drive_Thru_E\\ARQUIVOS\\PEDIDO.DAT");
 	return 0;
 }

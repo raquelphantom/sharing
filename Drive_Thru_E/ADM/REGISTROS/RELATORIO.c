@@ -37,9 +37,9 @@ fclose (Arq);
 int main()
 {
 	setlocale(LC_ALL, "");
-	system ("color a8");
+	system ("color 05");
+	system ("cls");
 	Relat();
-	system ("notepad E:\\Drive_Thru_E\\ARQUIVOS\\RELATPRODUTOS.TXT");
 	getch();
 	return 0;
 }
