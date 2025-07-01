@@ -29,7 +29,8 @@ do
 		printf ("%c", c); /* Mostro o caractere lido na tela */
 }
 while ( !feof(Arq) );
-	
+
+system("notepad E:\\Drive_Thru_E\\ARQUIVOS\\RELATPRODUTOS.TXT");
 	/* FECHA O ARQUIVO */	
 fclose (Arq);
 }

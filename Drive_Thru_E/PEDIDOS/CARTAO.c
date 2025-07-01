@@ -18,6 +18,7 @@ typedef struct {
 	float total;
 	float parcial;
 	char cartao[16+1];
+	char paga[30];
 }PRODUTO; 	PRODUTO p;
 
 void abre(void);
@@ -52,6 +53,8 @@ void cartao (void)
 {
 	char op;
 	int ind;
+	FILE *For;
+	For = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\FORMA.DAT", "w");
     do
     {	system("cls");
     	abre();
@@ -74,19 +77,21 @@ void cartao (void)
 	{
 		case '1': system("cls"); printf("\n%s selecionado, Digite o Número do Cartão: ", "Débito"); 
 			for (ind=0; ind<16; ind++){	fflush(stdin); p.cartao[ind]=getche();	} 
-			printf("\nDigite a senha do Cartão: "); senha(); gravar(); break;
+			printf("\nDigite a senha do Cartão: "); senha(); gravar(); 
+			fprintf(For,"Cartão Débito");break;
 			
 		case '2': system("cls"); printf("\n%s selecionado, Digite o Número do Cartão: ", "Crédito");
 			for (ind=0; ind<16; ind++){	fflush(stdin); p.cartao[ind]=getche();	} 
-			printf("\nDigite a senha do Cartão: "); senha(); gravar(); break;
+			printf("\nDigite a senha do Cartão: "); senha(); gravar(); 
+			fprintf(For,"Cartão Crédito");break;
 			
-		case '3': system("cls"); printf("\n%s selecionado, Insira ou Aproxiime o Cartão", "VR"); 
-			sleep(5); break;
+		case '3': system("cls"); printf("\n%s selecionado, Insira ou Aproxime o Cartão", "VR"); 
+			sleep(5); fprintf(For,"Vale Refeição");break;
 			
-		case '4': system("cls"); printf("\n%s selecionado, Insira ou Aproxiime o Cartão", "VA");
-			sleep(5); break;
+		case '4': system("cls"); printf("\n%s selecionado, Insira ou Aproxime o Cartão", "VA");
+			sleep(5); fprintf(For,"Vale Alimentação");break;
 	}
-
+	fclose(For);
 	
 }
 void senha (void)
@@ -113,7 +118,7 @@ void gravar (void)
 		getch();
 		exit(0);
 	}
-	fprintf(Pag, "%s\n", p.cartao);
+	fprintf(Pag,"%s", p.cartao);
     fclose(Pag);
 	
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h> 
+#include <string.h>
 #include <locale.h>
 
 #define TAMSTR 201
@@ -20,6 +21,7 @@ typedef struct {
 	float total;
 	float parcial;
 	char cartao[16+1];
+	char paga[30];
 }
 PRODUTO;
  /* PROTÓTIPOS DE FUNÃÇÕES */
@@ -83,6 +85,7 @@ void card (void){
 }
 
 void pick (void){
+	//memset(&p, 0, sizeof(p)); //zera a structure p
 	system("cls");
     card();// mostra cardápio lendo o prod.dat
 	printf("\nInsira o Código do que deseja: ");
@@ -98,6 +101,7 @@ void pick (void){
 	}
 	else{
 		printf("produto não encontrado");
+		remove("E:\\Drive_Thru_E\\ARQUIVOS\\PEDIDO.DAT");
 		exit (0);
 	}
 }

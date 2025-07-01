@@ -13,8 +13,6 @@
 #include <locale.h>
 
 
-
-
 char menu (void)
 {   char opc;
     do
@@ -26,12 +24,13 @@ char menu (void)
 		printf ("\n    2. CONSULTAR");
 		printf ("\n    3. RELATORIO");
 		printf ("\n    4. CARTÕES");
-		printf ("\n    5. EXCLUIR PROD.");
+		printf ("\n    5. PAGAMENTOS");
+		printf ("\n    6. EXCLUIR PROD.");
 		printf ("\n    0. ENCERRAR ");
 		printf ("\n==========================");
 		printf ("\nSUA ESCOLHA: "); 
 		fflush (stdin); opc=getche();
-	}while ( opc<'0' || opc>'5' );
+	}while ( opc<'0' || opc>'6' );
 	return (opc);
 }
 
@@ -44,7 +43,8 @@ void caso(char adm)
 		case '2' : system ("E:\\Drive_Thru_E\\ADM\\REGISTROS\\CONSULTA.exe"); break;
 		case '3' : system ("E:\\Drive_Thru_E\\ADM\\REGISTROS\\RELATORIO.exe"); break;
 		case '4' : system ("notepad E:\\Drive_Thru_E\\ARQUIVOS\\CARTOES.DAT"); break;
-		case '5' : system ("E:\\Drive_Thru_E\\ADM\\REGISTROS\\EXCLUIR.exe"); break;
+		case '5' : system ("notepad E:\\Drive_Thru_E\\ARQUIVOS\\PAGAMENTOS.DAT"); break;
+		case '6' : system ("E:\\Drive_Thru_E\\ADM\\REGISTROS\\EXCLUIR.exe"); break;
 	}
 
 }

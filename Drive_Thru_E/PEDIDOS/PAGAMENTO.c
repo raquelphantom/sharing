@@ -19,6 +19,7 @@ typedef struct {
 	float total;
 	float parcial;
 	char cartao[16+1];
+	char paga[30];
 }PRODUTO; 	PRODUTO p;
 
 void abre (void);
@@ -28,6 +29,7 @@ void money (void);
 void cartao (void);
 void pix (void);
 
+FILE * For;
 
 void abre (void)
 {
@@ -92,6 +94,7 @@ void money (void)
 {
 	float valor;
 	int flag;
+	For = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\FORMA.DAT", "w");
 	system("cls");
 	abre();
 	do
@@ -118,6 +121,8 @@ void money (void)
 	system ("color 0A");
 	printf("Pedido pago com Dinheiro.");
 	getch();
+	fprintf(For,"Dinheiro");
+	fclose(For);
 }
 
 void cartao (void)
@@ -131,6 +136,7 @@ void cartao (void)
 
 void pix (void)
 {
+	For = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\FORMA.DAT", "w");
 	system ("cls");
 	printf("\nEscaneie o QR code:");
 	system("start E:\\Drive_Thru_E\\ARQUIVOS\\QR_CODE.PNG");
@@ -140,6 +146,8 @@ void pix (void)
 	system ("color 01");
 	printf("Pedido pago com PIX.");
 	getch();
+	fprintf(For,"PIX");
+	fclose(For);
 }
 
 
@@ -155,6 +163,7 @@ int main()
 	system("E:\\Drive_Thru_E\\PEDIDOS\\COMANDA");
 	system ("color 07");
 	printf("\nAgradecemos pela preferência!!!\nVolte sempre :)");
+	remove("E:\\Drive_Thru_E\\ARQUIVOS\\FORMA.DAT");
 	getch();
 	return 0;
 }
