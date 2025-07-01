@@ -78,9 +78,19 @@ void gravar (PRODUTO p)
 	Num = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\NUMERO.DAT", "r");
 	Pag = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\CARTOES.DAT", "a");
 	
+	char ast[16+1];
+	int i;
+	
 	while (fgets(p.cartao, sizeof(p.cartao), Num) != NULL) { 
+	
+		strcpy(ast, p.cartao);
+		for ( i = 4; i <= 11; i++) 
+		{
+			ast[i] = '*';
+		}
+	
 		fprintf(Pag, "\nCod. Ped  |    \t   Num. Cart.\n");
-		fprintf(Pag, "   %d      |   \t%s", p.codped, p.cartao);
+		fprintf(Pag, "   %d      |   \t%s", p.codped, ast);
 		fprintf(Pag,"\n====================================================================");
 	}
 	
