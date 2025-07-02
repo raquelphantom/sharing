@@ -12,6 +12,7 @@
 char menu (void){
 	char opc[6];
 	system("cls");
+	system ("color 0B	");
 	printf("\n ========================== \n");
 	printf("            MENU         ");
 	printf("\n ========================== \n");

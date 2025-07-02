@@ -23,7 +23,8 @@ typedef struct {
 }PRODUTO; 	PRODUTO p;
 
 float val =0;
-FILE *Cod, *Pag, *Num, *Arq, *Com, *For, *Car;
+int qtdTotal= 0;
+FILE *Cod, *Pag, *Num, *Arq, *Com, *For, *Car, *fila;
 
 int contagemCod (void){
     int cod = 1; 
@@ -62,6 +63,7 @@ void comanda (PRODUTO p){
 	while (fread(&p, sizeof(p), 1, Arq) == 1) 
 	{
 	fprintf(Com,"\n%i\t %s\t %.2f\t\t %i\t %.2f",p.r.codprod, p.r.descrprod, p.r.custoprod, p.qtd, p.parcial);
+	qtdTotal=qtdTotal+ p.qtd;
 	}
 	fprintf(Com,"\n------------------------------------------------------------ ");
 	fprintf(Com,"\n\nTotal do Pedido:R$%.2f\n",p.total);
@@ -116,6 +118,31 @@ void forma (PRODUTO p)
 		
 }
 
+void condFila(PRODUTO p){
+	int count = 0;
+    int cod;
+	//criou fila
+	fila = fopen("K:\\Drive_Thru_K\\ARQUIVOS\\FILA.DAT", "r");
+	while (fscanf(fila, "%d", &cod) == 1) {count++;}
+	
+	// Verifica se a fila está cheia
+   if (count >= 5) 
+   {
+        printf("\nFila cheia! Aguarde para o próximo pedido.\n");
+        return;
+   }
+    else {
+        // Insere o pedido na fila
+        	if (qtdTotal >= 5) 
+			{
+			printf("\nOpa! Aguarde um pouco, seu pedido está na fila.");
+	        fila = fopen("K:\\Drive_Thru_K\\ARQUIVOS\\FILA.DAT", "a");
+            fprintf(fila, "%d\n", p.codped);
+            fclose(fila);
+    		}
+	}	
+}
+
 int main()
 {
 	p.codped = contagemCod();
@@ -123,6 +150,7 @@ int main()
 	gravar(p);
 	comanda(p);
 	forma(p);
+	condFila(p);
 	system("notepad K:\\Drive_Thru_K\\ARQUIVOS\\COMANDA.DAT");
 	remove("K:\\Drive_Thru_K\\ARQUIVOS\\PEDIDO.DAT");
 	remove("K:\\Drive_Thru_K\\ARQUIVOS\\FORMA.DAT");

@@ -16,3 +16,5 @@ COD	DESCRICAO               CUSTO
   8	GitShake             	R$       15,00
   9	Cupcake++            	R$       18,00
  10	Array de Amendoim    	R$       22,00
+ 11	batatinha            	R$        2,00
+ 12	burgui               	R$       22,00

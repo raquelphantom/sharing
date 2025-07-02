@@ -25,6 +25,7 @@ void abre(void);
 void cartao (void);
 void senha (void);
 void gravar (void);
+void valida (void);
 
 
 void abre (void)
@@ -76,13 +77,11 @@ void cartao (void)
 	switch (op)
 	{
 		case '1': system("cls"); printf("\n%s selecionado, Digite o Número do Cartão: ", "Débito"); 
-			for (ind=0; ind<16; ind++){	fflush(stdin); p.cartao[ind]=getche();	} 
-			printf("\nDigite a senha do Cartão: "); senha(); gravar(); 
+			valida(); printf("\nDigite a senha do Cartão: "); senha(); gravar(); 
 			fprintf(For,"Cartão Débito");break;
 			
 		case '2': system("cls"); printf("\n%s selecionado, Digite o Número do Cartão: ", "Crédito");
-			for (ind=0; ind<16; ind++){	fflush(stdin); p.cartao[ind]=getche();	} 
-			printf("\nDigite a senha do Cartão: "); senha(); gravar(); 
+			valida(); printf("\nDigite a senha do Cartão: "); senha(); gravar(); 
 			fprintf(For,"Cartão Crédito");break;
 			
 		case '3': system("cls"); printf("\n%s selecionado, Insira ou Aproxime o Cartão", "VR"); 
@@ -121,6 +120,19 @@ void gravar (void)
 	fprintf(Pag,"%s", p.cartao);
     fclose(Pag);
 	
+}
+
+void valida (void)
+{
+	int ind;
+	for (ind = 0; ind < 16; ) 
+	{
+	    fflush(stdin);
+	    p.cartao[ind] = getche();
+	
+	    if (p.cartao[ind] >= '0' && p.cartao[ind] <= '9') {ind++;} // avança apenas se for número
+		else {printf("\nDigite apenas números (0-9). Tente novamente: ");}
+	}
 }
 
 int main()

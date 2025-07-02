@@ -108,7 +108,7 @@ void money (void)
 			printf("\nFaltam R$%.2f", p.total);
 		}else
 		{
-			if(valor > p.total)
+			if(valor >= p.total)
 			{
 			valor=valor-p.total;
 			printf("\nTroco de R$%.2f", valor);
@@ -139,7 +139,7 @@ void pix (void)
 	For = fopen("E:\\Drive_Thru_E\\ARQUIVOS\\FORMA.DAT", "w");
 	system ("cls");
 	printf("\nEscaneie o QR code:");
-	system("start E:\\Drive_Thru_E\\ARQUIVOS\\QR_CODE.PNG");
+	system("start E:\\Drive_Thru_E\\ARQUIVOS\\1QR_CODE.PNG");
 	sleep (5);
 	system("taskkill /im Photos.exe /f");
 	system ("cls");
